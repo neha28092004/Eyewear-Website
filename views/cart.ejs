@@ -1,0 +1,94 @@
+<%- include('partials/header') %>
+
+<!-- Centering Container -->
+<div class="container d-flex flex-column align-items-center justify-content-center text-center min-vh-100">
+
+
+<h1>Your Cart</h1>
+
+<% if (cart.length === 0) { %>
+  <p>Your cart is empty.</p>
+<% } else { %>
+  <% let totalAmount = 0; %>
+  <% cart.forEach(item => { %>
+    <% totalAmount += parseFloat(item.price) * item.quantity; %>
+    <div class="cart-item">
+      <h3><%= item.name %></h3>
+      <p>Price: $<%= item.price %></p>
+      <p>Quantity: <%= item.quantity %></p>
+
+      <!-- Update Quantity Form -->
+      <form action="/cart/update" method="POST">
+        <input type="hidden" name="productId" value="<%= item.id %>">
+        <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="form-control w-70">
+        <button type="submit">Update Quantity</button>
+      </form>
+
+      <!-- Remove Item Form -->
+      <form action="/cart/remove" method="POST">
+        <input type="hidden" name="productId" value="<%= item.id %>">
+        <button type="submit">Remove</button>
+      </form>
+    </div>
+  <% }) %>
+
+  <!-- Store cart data & total amount safely -->
+  <input type="hidden" id="cartDataInput" value='<%= JSON.stringify(cart) %>'>
+  <input type="hidden" id="totalAmountInput" value="<%= totalAmount.toFixed(2) %>">
+  
+  <h3>Total: $<%= totalAmount.toFixed(2) %></h3>
+
+  <!-- Shipping Address Form -->
+  <form id="shipping-form">
+    <label for="shippingAddress">Shipping Address:</label>
+    <textarea id="shippingAddress" name="shippingAddress" required style="width: 300px; height: 100px;"></textarea>
+  </form>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <button id="pay-btn">Pay with Stripe</button>
+  <div id="payment-message"></div>
+
+  <script>
+    document.getElementById("pay-btn").addEventListener("click", async function() {
+  const shippingAddress = document.getElementById("shippingAddress").value;
+  if (!shippingAddress) {
+      alert("Please enter your shipping address before proceeding.");
+      return;
+  }
+
+  const totalAmount = parseFloat(document.getElementById("totalAmountInput").value) || 0;
+  const cartData = JSON.parse(document.getElementById("cartDataInput").value || "[]");
+
+  try {
+      const response = await fetch("/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+              totalAmount: Number(totalAmount),
+              shippingAddress,
+              cart: cartData.length ? cartData : []
+          })
+      });
+
+      const session = await response.json();
+      if (!response.ok) {
+          alert("Error: " + session.error);
+          return;
+      }
+
+      console.log("🚀 DEBUG: Redirecting to Stripe:", session.url);
+      window.location.href = session.url;
+
+  } catch (err) {
+      console.error("❌ Fetch error:", err);
+      alert("An error occurred while processing payment.");
+  }
+});
+
+  </script>
+
+<% } %>
+
+</div> <!-- End Centering Container -->
+
+<%- include('partials/footer') %>

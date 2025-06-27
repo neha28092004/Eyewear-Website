@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<main>
+  <div class="product-detail">
+    <h2><%= product.name %></h2> <!-- Product Name -->
+    <p><%= product.description %></p> <!-- Product Description -->
+    <img src="<%= product.image_url %>" alt="<%= product.name %>"> <!-- Product Image -->
+    <p>Price: $<%= product.price %></p> <!-- Product Price -->
+    <p>Category: <%= product.category %></p> <!-- Product Category -->
+    
+    <!-- Add to Cart Form -->
+    <div class="d-flex justify-content-center align-items-center">
+    <form action="/cart/add/<%= product.id %>" method="POST" class="text-center">
+      <label for="quantity_<%= product.id %>">Quantity:</label>
+      <div class="d-flex align-items-center justify-content-center gap-2">
+      <input type="number" id="quantity_<%= product.id %>" name="quantity" value="1" min="1" required autocomplete="off" class="form-control w-50">
+    </div>
+      <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+  </form>
+  
+  
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Eyewear Shop</p>
+</footer>
+
+
+<%- include('partials/footer') %>

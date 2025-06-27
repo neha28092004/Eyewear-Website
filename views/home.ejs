@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<header class="p-3 text-bg-dark">
+  <div class="container-fluid bg-dark" style="height: 40px;">
+    <div class="d-flex flex-wrap align-items-center justify-content-center-end justify-content-lg-start" >
+      <i class="bi bi-eyeglasses"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="white" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+        <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4m2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A2 2 0 0 0 8 6c-.532 0-1.016.208-1.375.547M14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0"/>
+      </svg></i>
+
+      <ul class="nav col-12 col-lg-auto mx-5 me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/home" class="nav-link px-6 text-primary fs-5">Home</a></li>
+        <li><a href="/tryon" class="nav-link px-6 text-primary fs-5">Virtual Try On</a></li>
+        <li><a href="products" class=" nav-link px-6 text-primary fs-5">Products</a></li>
+        <li><a href="/eyetest" class="nav-link px-6 text-primary fs-5">Book Appointment</a></li>
+        <li><a href="/about" class="nav-link px-6 text-primary fs-5">About</a></li>
+        <li><a href="/contact" class="nav-link px-6 text-primary fs-5">Contact</a></li>
+      </ul>
+
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <input type="search" class="form-control form-control-dark text-bg-light" placeholder="Search..." aria-label="Search">
+      </form>
+
+      <div class="text-end">
+        <a class="btn btn-outline-light me-2" href="/login" role="button">Login</a>
+        <a class="btn btn-warning" href="/register" role="button">Register</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid text-center col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6 ">
+      <img src="/photos/couple.jpg" class="d-block mx-lg-auto img-fluid" alt="couple" height="500" width="500"
+        loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-1 max-bold text-body-emphasis lh-1 mb-3">Vision Optics</h1><hr>
+      <p class="lead max-bold ">"Need me, need glasses for a clearer tomorrow"</p>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

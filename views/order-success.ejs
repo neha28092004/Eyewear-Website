@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<h1>Thank You!</h1>
+<p>Your payment was successful. Your order has been placed.</p>
+
+<h2>Order Details</h2>
+<p><strong>Order ID:</strong> <%= order.id %></p>
+<p><strong>Total Price:</strong> $<%= order.total_price %></p>
+
+<h3>Items Purchased</h3>
+<ul>
+    <% items.forEach(item => { %>
+        <li><%= item.name %> - Quantity: <%= item.quantity %> - Price: $<%= item.price %></li>
+    <% }); %>
+</ul>
+
+<a href="/products">Continue Shopping</a>
+<%- include('partials/footer') %>

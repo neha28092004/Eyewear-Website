@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<main>
+    <h1>Our Products</h1>
+    <section id="products">
+      <% products.forEach(function(product) { %> <!-- Loop through products -->
+        <div class="product">
+          <img src="<%= product.image_url %>" alt="<%= product.name %>">
+          <h3><%= product.name %></h3>
+          <p><%= product.brand %></p>
+          <p>$<%= product.price %></p>
+          <a href="/product/<%= product.id %>">View Details</a>
+        </div>
+      <% }); %>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Eyewear Shop</p>
+  </footer>
+
+<%- include('partials/footer') %>
